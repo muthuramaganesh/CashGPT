@@ -8,7 +8,7 @@ import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, Cartesia
 // GET  /api/stats   → returns model metrics + aggregates
 // GET  /api/shap    → returns SHAP feature importance
 // ─────────────────────────────────────────────────────────────────────────────
-const API_BASE = "https://malinois.duckdns.org";  // ← swap when live
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000"; // ← swap when live
 
 async function fetchModelStats() {
   try {
