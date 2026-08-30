@@ -223,23 +223,16 @@ export default function CashGPTDashboard() {
   const [filterRisk, setFilterRisk] = useState("All");
   const [tick, setTick] = useState(0);
 
-useEffect(() => {
-  const mock = generateMockData();
-  fetchModelStats().then(api => {
-    if (api) { setData({ ...mock, ...api }); setIsMock(false); }
-    else     { setData(mock); setIsMock(true); }
-  });
-}, []);
-
   useEffect(() => {
     async function load() {
       setLoading(true);
+      const mock = generateMockData();
       const live = await fetchModelStats();
       if (live) {
-        setData(live);
+        setData({ ...mock, ...live });
         setApiStatus("live");
       } else {
-        setData(generateMockData());
+        setData(mock);
         setApiStatus("mock");
       }
       setLoading(false);
